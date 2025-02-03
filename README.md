@@ -42,7 +42,7 @@
     <a href="https://github.com/university-of-toronto-fsf/fullstack-pern">
       <strong>Explore the docs »</strong>
     </a>
-    <br />
+    <br /> `
     <br />
 &middot; <a href="#">View Demo</a>
 
