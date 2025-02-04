@@ -7,6 +7,7 @@ import { authRouter } from './auth-routes.js'; // note here we refer to the tran
 
 // 3(c). create a new Router Object
 const apiRouter = Router();
-apiRouter.use('/users', authRouter);
+// the current route from here would be /auth/ - we can then add /register / login /logout etc.
+apiRouter.use('/', authRouter);
 
 export default apiRouter;
