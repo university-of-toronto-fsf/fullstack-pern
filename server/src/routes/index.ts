@@ -4,8 +4,8 @@ const router = Router(); // Create a new Router Object
 
 // 2(a). create separate files that will handle the /api and /auth routes
 // and import the routes
-import apiRouter from './api';
-import authRouter from './auth';
+import apiRouter from './api/index.js';
+import authRouter from './auth/index.js';
 
 // 2(b). define test routes
 /* redefine and refactor these routes below
