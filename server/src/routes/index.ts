@@ -1,6 +1,8 @@
 // 2. Set Up a Router
 import { Router } from 'express'; // Import the express Router
-const router = Router(); // Create a new Router
+const router = Router(); // Create a new Router Object
+
+// 2(a). create separate files that will handle the /api and /auth routes
 
 // 2(b). define  test routes
 router.get('/api', (req, res) => {
