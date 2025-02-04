@@ -3,8 +3,12 @@ import { Router } from 'express'; // Import the express Router
 const router = Router(); // Create a new Router Object
 
 // 2(a). create separate files that will handle the /api and /auth routes
+// and import the routes
+import apiRouter from './api';
+import authRouter from './auth';
 
-// 2(b). define  test routes
+// 2(b). define test routes
+/* redefine and refactor these routes below
 router.get('/api', (req, res) => {
   console.log('Hello World!');
   console.log('req.url', req.url);
@@ -16,5 +20,10 @@ router.get('/auth', (req, res) => {
   console.log('req.url', req.url);
   res.json({ message: 'Hello auth endpoint' });
 });
+*/
+
+// 2(b) refactored routes
+router.use('/api', apiRouter);
+router.use('/auth', authRouter);
 
 export default router;
