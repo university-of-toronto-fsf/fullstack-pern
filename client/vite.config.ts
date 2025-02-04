@@ -8,13 +8,13 @@ export default defineConfig({
     open: true,
     proxy: {
       '/api': {
-        target: 'http://localhost:3001' /* note to change in production */,
+        target: 'http://localhost:3002' /* note to change in production */,
         changeOrigin: true,
         secure: false /* to adjust in production for https:// to true */,
         /* rewrite: (path) => path.replace(/^\/api/, ''), */
       },
       '/auth': {
-        target: 'http://localhost:3001',
+        target: 'http://localhost:3002',
         changeOrigin: true,
         secure: false /* to adjust in production for https:// to true */,
         /* rewrite: (path) => path.replace(/^\/api/, ''), */
