@@ -1,10 +1,11 @@
 {
+  "include": ["src"],
+
   "compilerOptions": {
     /* Visit https://aka.ms/tsconfig to read more about this file */
     /* file created using command npx tsc --init */
 
     /* eja: added additional options */
-    "include": ["src"],
 
     /* Projects */
     // "incremental": true,                              /* Save .tsbuildinfo files to allow for incremental compilation of projects. */
