@@ -1,0 +1,38 @@
+{
+  "name": "fullstack-pern",
+  "version": "1.0.0",
+  "description": "this application demonstrates a fullstack PERN app",
+  "keywords": [
+    "PERN",
+    "fullstack",
+    "FSF",
+    "postgresql",
+    "ExpressJS",
+    "NodeJS",
+    "React",
+    "NodeJS"
+  ],
+  "homepage": "https://github.com/university-of-toronto-fsf/fullstack-pern#readme",
+  "bugs": {
+    "url": "https://github.com/university-of-toronto-fsf/fullstack-pern/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/university-of-toronto-fsf/fullstack-pern.git"
+  },
+  "license": "ISC",
+  "author": "Edward Apostol",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "cd client && npm run build && cd ../server && npm run build",
+    "client:dev": "cd client && npm run dev",
+    "server:dev": "cd server && npm run start",
+    "start:dev": "npm run build && concurrently \"npm run server:dev\" \"wait-on tcp:3002 && npm run client:dev\""
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2",
+    "wait-on": "^8.0.2"
+  }
+}
