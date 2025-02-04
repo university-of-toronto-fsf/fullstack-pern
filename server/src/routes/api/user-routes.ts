@@ -12,8 +12,15 @@
 
 // 4. import express, request, and response from express
 import express from 'express';
-import { Request, Response } from 'express';
+// 5(a). import Request and Response types from express
+import { type Request, type Response } from 'express';
 
 const router = express.Router();
+
+router.get('/', (req: Request, res: Response) => {
+  console.log('Hello user endpoint!');
+  console.log('req.url', req.url);
+  res.json({ message: 'Hello user endpoint' });
+});
 
 export { router as userRouter };

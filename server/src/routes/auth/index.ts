@@ -11,3 +11,5 @@ const apiRouter = Router();
 apiRouter.use('/', authRouter);
 
 export default apiRouter;
+
+// note: test the end points in insomnia or postman
