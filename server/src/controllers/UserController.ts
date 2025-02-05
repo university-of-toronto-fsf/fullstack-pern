@@ -18,6 +18,7 @@ class UserController {
     try {
       const response = await fetch('https://randomuser.me/api/');
       const data = await response.json();
+      console.log('data', data.results[0].name);
       const name = `${data.results[0].name.first} ${data.results[0].name.last}`;
       return name;
     } catch (error) {
@@ -27,6 +28,8 @@ class UserController {
   }
 
   // Get all users
+  // TODO: replace the sample code with the actual DB operation
+  // /api/users/getUsers
   public async getAllUsers(req: Request, res: Response): Promise<void> {
     console.log('getAllUsers endpoint');
     this.debugInfo(req);
@@ -39,16 +42,20 @@ class UserController {
             res.status(500).json({ error: 'Failed to fetch users' });
         }
 */
+
+    let result = await this.generateRandomName();
+    console.log('sample result', result);
     res
       .status(200)
       .json([
-        { name: this.generateRandomName() },
-        { name: this.generateRandomName() },
-        { name: this.generateRandomName() },
+        { name: await this.generateRandomName() },
+        { name: await this.generateRandomName() },
+        { name: await this.generateRandomName() },
       ]);
   }
 
   // Get user by ID
+  // /api/users/getUserById/:id
   public async getUserById(req: Request, res: Response): Promise<void> {
     console.log('getUserById endpoint');
     this.debugInfo(req);
@@ -56,7 +63,7 @@ class UserController {
     // for testing purposes only, generate a random name and return the same ID
     res
       .status(200)
-      .json({ name: this.generateRandomName(), id: req.params.id });
+      .json({ name: await this.generateRandomName(), id: req.params.id });
     /*
     // perform the required DB operation
     try {
