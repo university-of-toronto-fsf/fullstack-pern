@@ -1,9 +1,11 @@
 /**
- * This file defines the `AuthService` class, which provides methods to be used as middleware functions
- * for authenticating users in an application. The authentication process is based on JSON Web Tokens (JWT).
+ * This file defines the `AuthService` class, which provides methods
+ * for the client side portion of the application to help
+ * for authenticating users in an application.
+ * The authentication process is based on JSON Web Tokens (JWT).
  *
  * The `AuthService` class includes methods for:
- * - Generating JWT tokens for authenticated users.
+ * - checking if a user is logged in.
  * - Verifying the validity of provided JWT tokens.
  * - Extracting user information from JWT tokens.
  *
