@@ -25,6 +25,8 @@ router.get('/', async (req: Request, res: Response): Promise<void> => {
   res.status(200).json({ message: 'Hello user endpoint' });
 });
 
+// all routes
+
 router.get('/getUsers', (req: Request, res: Response) => {
   UserController.getAllUsers(req, res);
 });
