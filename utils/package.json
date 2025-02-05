@@ -1,0 +1,22 @@
+{
+  "name": "utils",
+  "version": "1.0.0",
+  "description": "this is for the utils folder",
+  "keywords": [
+    "authentication",
+    "middleware",
+    "JWT",
+    "utilities",
+    "functions"
+  ],
+  "license": "ISC",
+  "author": "Edward J. Apostol",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "jwt-decode": "^4.0.0"
+  }
+}
