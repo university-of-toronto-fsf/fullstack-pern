@@ -16,12 +16,13 @@ dotenv.config();
 console.log(`process.env.PORT: ${process.env.PORT}`);
 const PORT = process.env.PORT || 3002;
 
-// 1(f). Define directory for static files and connect routes to express app
+// 1(f). add JSON parsing middleware before the routes are set up
+APP.use(express.json());
+APP.use(express.urlencoded({ extended: true }));
+
+// 1(g). Define directory for static files and connect routes to express app
 APP.use(express.static('../client/dist'));
 APP.use(routes);
-
-// 1(g). add JSON parsing middleware
-APP.use(express.json());
 
 // 1(h). launch the server
 APP.listen(PORT, () => {
