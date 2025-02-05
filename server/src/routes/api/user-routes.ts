@@ -14,13 +14,34 @@
 import express from 'express';
 // 5(a). import Request and Response types from express
 import { type Request, type Response } from 'express';
+import UserController from '../../controllers/UserController.js';
 
 const router = express.Router();
 
-router.get('/', (req: Request, res: Response) => {
+// example test endpoint /api/users
+router.get('/', async (req: Request, res: Response): Promise<void> => {
   console.log('Hello user endpoint!');
   console.log('req.url', req.url);
-  res.json({ message: 'Hello user endpoint' });
+  res.status(200).json({ message: 'Hello user endpoint' });
+});
+
+router.get('/getUsers', (req: Request, res: Response) => {
+  UserController.getAllUsers(req, res);
+});
+
+// example get User by ID endpoint /api/users/getUserById/:id
+router.get('/getUser/:id', (req: Request, res: Response) => {
+  UserController.getUserById(req, res);
+});
+
+// example update User by ID endpoint /api/users/updateUser/:id
+router.put('/updateUser/:id', (req: Request, res: Response) => {
+  UserController.updateUserById(req, res);
+});
+
+// example delete User by ID endpoint /api/users/deleteUser/:id
+router.delete('/deleteUser/:id', (req: Request, res: Response) => {
+  UserController.deleteUserById(req, res);
 });
 
 export { router as userRouter };
