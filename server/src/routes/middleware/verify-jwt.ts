@@ -8,9 +8,17 @@ const verifyJWT = async (req: Request, res: Response, next: NextFunction) => {
   console.log('req.url', req.url);
   console.log('req.body', req.body);
 
+  // if the URL is / and there is no authorization header, skip the JWT verification
+  // because the user is not trying to access a protected route
+  // its simply the home page.
+  if (req.url === '/' && !req.headers['authorization']) {
+    next();
+    return;
+  }
+
   // if the URL is /api/users/login, skip the JWT verification
   // because the user doesn't have a token yet
-  if (req.url === '/api/users/login') {
+  if (req.url === '/auth/login') {
     next();
     return;
   }
