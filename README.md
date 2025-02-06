@@ -42,7 +42,7 @@
     <a href="https://github.com/university-of-toronto-fsf/fullstack-pern">
       <strong>Explore the docs »</strong>
     </a>
-    <br /> `
+    <br />
     <br />
 &middot; <a href="#">View Demo</a>
 
@@ -185,10 +185,40 @@ directory,as well as the client and server directories.
 ### Testing the API Endpoints
 
 Once the project is launched, to test the application and the API endpoints,
-you can use Insomnia (<https://insomnia.rest/>) and import this collection of
-API URLs found in this repository's docs folder.
+you can use Insomnia (<https://insomnia.rest/>) or equivalent and import
+this collection of API URLs found in this repository's docs folder
+[here](./docs/Insomnia_2025-02-05.json).
 
-_For more examples, please refer to the [Documentation](https://example.com)_
+![import Insomnia APIs][insomniaApiImport]
+
+After importing the API endpoint collection, to use the endpoints in Insomnia,
+you will need to create a token to try the rest of the URLs, then take the token
+and copy/paste it into a Authentication Header setting as a bearer token.
+This simulates the logging in process or registering a new user from the front-end
+react components and receiving a token .
+
+You will need to run the POST request that simulates the login. the Insomnia endpoint
+is called `Test Post Logging in and get token NEW`.
+
+Make sure the `Body Tab` has a sample JSON object with credentials:
+
+```json
+{
+  "username": "JollyGuru",
+  "email": "jollyguru@mail.com",
+  "password": "password123"
+}
+```
+
+Once the request is setup, click the _send_ button, and Insomnia should return
+with a token that you can copy and paste as an _authentication_ header for the
+other API endpoints.
+
+The diagram below illustrates the instuctions written above.
+
+![create JSON web token endpoint](./images/readme/insomnia-create-token.png 'Create Token Endpoint')
+
+_For more examples, please refer to the [Documentation](./docs/DOCS.md)_
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -197,14 +227,17 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 ## Roadmap
 
 - [ ] Documentation
-- [ ] Feature 2
-- [ ] Feature 3
-  - [ ] Nested Feature
+- [ ] Set up React Frontend and Node/Express Backend
+- [ ] Set up initial API routes and JSON Web Token Validation
+  - [ ] Define server API routes for /auth and /api, /api/user
+  - [ ] Test API routes
+  - [ ] Add middleware function to validate JWT every time a request is made
+- [ ] More to come...
 
 ### Open Issues
 
-see [open issues][open-issues-link] for a full list of proposed features and
-known issues).
+see <https://github.com/university-of-toronto-fsf/fullstack-pern/issues> for a
+full list of proposed features and known issues).
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -213,17 +246,8 @@ known issues).
 ## Contributing
 
 Contributions are what make the open source community such an amazing place to
-learn, inspire, and create. Any contributions you make are **greatly appreciated**.
-
-If you have a suggestion that would make this better, please fork the repo and
-create a pull request. You can also simply open an issue with the tag "enhancement".
-Don't forget to give the project a star! Thanks again!
-
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
+learn, inspire, and create. We're not taking contributions at the moment, but feel
+free to explore!
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -296,6 +320,6 @@ Project Link:
 
 [bug-report-link]: https://github.com/university-of-toronto-fsf/fullstack-pern/issues/new?labels=bug&template=bug-report---.md
 [request-feature-link]: https://github.com/university-of-toronto-fsf/fullstack-pern/issues/new?labels=enhancement&template=feature-request---.md
-[open-issues-link]: https://github.com/university-of-toronto-fsf/fullstack-pern/issues
 [top-contributors-link]: https://github.com/university-of-toronto-fsf/fullstack-pern/graphs/contributors
 [contrib-rocks-image]: https://contrib.rocks/image?repo=university-of-toronto-fsf/fullstack-pern
+[insomniaApiImport]: ./images/readme/insomnia-import-api-collection.png 'import Insomnia APIs'
