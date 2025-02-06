@@ -85,6 +85,10 @@
 
 [![Product Name Screen Shot][product-screenshot]](https://example.com)
 
+This project demonstrates mock CRUD functionality, logging in and receiving a
+JSON Web Token for authentication (JWT), and using the JWT to validate your access
+across various URIs associated with the website application.
+
 Here's a blank template to get started. To avoid retyping too much info,
 do a search and replace with your text editor for the following:
 
@@ -102,12 +106,17 @@ do a search and replace with your text editor for the following:
 
 ### Built With
 
-- [![Next][Next.js]][Next-url]
+[//]: # '- [![Next][Next.js]][Next-url]'
+[//]: # '- [![Vue][Vue.js]][Vue-url]'
+[//]: # '- [![Angular][Angular.io]][Angular-url]'
+[//]: # '- [![Svelte][Svelte.dev]][Svelte-url]'
+[//]: # '- [![Laravel][Laravel.com]][Laravel-url]'
+[//]: # 'This may be the most platform independent comment'
+
+- ![Postgres](https://img.shields.io/badge/postgres-%23316192.svg?style=for-the-badge&logo=postgresql&logoColor=white)
+- ![Express.js](https://img.shields.io/badge/express.js-%23404d59.svg?style=for-the-badge&logo=express&logoColor=%2361DAFB)
 - [![React][React.js]][React-url]
-- [![Vue][Vue.js]][Vue-url]
-- [![Angular][Angular.io]][Angular-url]
-- [![Svelte][Svelte.dev]][Svelte-url]
-- [![Laravel][Laravel.com]][Laravel-url]
+- ![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white)
 - [![Bootstrap][Bootstrap.com]][Bootstrap-url]
 - [![JQuery][JQuery.com]][JQuery-url]
 
@@ -117,46 +126,54 @@ do a search and replace with your text editor for the following:
 
 ## Getting Started
 
-This is an example of how you may give instructions on setting up your project locally.
-To get a local copy up and running follow these simple example steps.
+1. Clone the repo <https://github.com/university-of-toronto-fsf/fullstack-pern>
+   into a folder / directory of your choosing.
+2. Navigate to the directory where you cloned the contents in mac terminal or
+   git bash shell
+3. Perform the following commands in the appropriate terminal:
+
+```bash
+# assume you have navigated to the root directory of the cloned project
+npm install
+npm run build
+```
 
 ### Prerequisites
 
-This is an example of how to list things you need to use the software and
-how to install them.
+The packages needed are identified in the package.json files in the project root
+directory,as well as the client and server directories.
 
-- npm
+- npm: from the root directory
 
   ```sh
-  npm install npm@latest -g
+  npm install
   ```
 
 ### Installation
 
-1. Get a free API Key at [https://example.com](https://example.com)
-2. Clone the repo
+1. Follow the instructions in the <a href="#getting-started">getting started</a>
+   section above.
+2. Configure the .env file in the ./server directory of the project to identify
+   the DB username, DB password, DB URL (if needed), DB name, and JWT Secret key
 
-   ```sh
-   git clone https://github.com/university-of-toronto-fsf/fullstack-pern.git
+   ```bash
+
+      # these settings will be used once the database is established.
+      DB_NAME= name of database
+      DB_USER= name of database user, e.g. postgres
+      DB_PASSWORD= password for database user
+      DB_URL= url of database server if needed
+
+      # default API service PORT
+      PORT=3002
+      # add JWT secret key used for token generation
+      JWT_SECRET_KEY='some crazy secret key value here'
    ```
 
-3. Install NPM packages
+3. run the command to start the application
 
    ```sh
-   npm install
-   ```
-
-4. Enter your API in `config.js`
-
-   ```js
-   const API_KEY = 'ENTER YOUR API';
-   ```
-
-5. Change git remote url to avoid accidental pushes to base project
-
-   ```sh
-   git remote set-url origin university-of-toronto-fsf/fullstack-pern
-   git remote -v # confirm the changes
+   npm run start:dev
    ```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -165,9 +182,11 @@ how to install them.
 
 ## Usage
 
-Use this space to show useful examples of how a project can be used.
-Additional screenshots, code examples and demos work well in this space.
-You may also link to more resources.
+### Testing the API Endpoints
+
+Once the project is launched, to test the application and the API endpoints,
+you can use Insomnia (<https://insomnia.rest/>) and import this collection of
+API URLs found in this repository's docs folder.
 
 _For more examples, please refer to the [Documentation](https://example.com)_
 
@@ -266,18 +285,8 @@ Project Link:
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/linkedin_username
 [product-screenshot]: images/screenshot.png
-[Next.js]: https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white
-[Next-url]: https://nextjs.org/
 [React.js]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
 [React-url]: https://reactjs.org/
-[Vue.js]: https://img.shields.io/badge/Vue.js-35495E?style=for-the-badge&logo=vuedotjs&logoColor=4FC08D
-[Vue-url]: https://vuejs.org/
-[Angular.io]: https://img.shields.io/badge/Angular-DD0031?style=for-the-badge&logo=angular&logoColor=white
-[Angular-url]: https://angular.io/
-[Svelte.dev]: https://img.shields.io/badge/Svelte-4A4A55?style=for-the-badge&logo=svelte&logoColor=FF3E00
-[Svelte-url]: https://svelte.dev/
-[Laravel.com]: https://img.shields.io/badge/Laravel-FF2D20?style=for-the-badge&logo=laravel&logoColor=white
-[Laravel-url]: https://laravel.com
 [Bootstrap.com]: https://img.shields.io/badge/Bootstrap-563D7C?style=for-the-badge&logo=bootstrap&logoColor=white
 [Bootstrap-url]: https://getbootstrap.com
 [JQuery.com]: https://img.shields.io/badge/jQuery-0769AD?style=for-the-badge&logo=jquery&logoColor=white
