@@ -89,19 +89,6 @@ This project demonstrates mock CRUD functionality, logging in and receiving a
 JSON Web Token for authentication (JWT), and using the JWT to validate your access
 across various URIs associated with the website application.
 
-Here's a blank template to get started. To avoid retyping too much info,
-do a search and replace with your text editor for the following:
-
-- `university-of-toronto-fsf`,
-- `fullstack-pern`,
-- `twitter_handle`,
-- `linkedin_username`,
-- `email_client`,
-- `email`,
-- `project_title`,
-- `project_description`,
-- `project_license`
-
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ### Built With
@@ -307,7 +294,7 @@ Project Link:
 [license-shield]: https://img.shields.io/github/license/university-of-toronto-fsf/fullstack-pern.svg?style=for-the-badge
 [license-url]: https://github.com/university-of-toronto-fsf/fullstack-pern/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
-[linkedin-url]: https://linkedin.com/in/linkedin_username
+[linkedin-url]: https://linkedin.com/in/edwardapostol
 [product-screenshot]: images/screenshot.png
 [React.js]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
 [React-url]: https://reactjs.org/
