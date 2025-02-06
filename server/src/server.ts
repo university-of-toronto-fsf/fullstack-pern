@@ -12,7 +12,6 @@ import routes from './routes/index.js';
 import dotenv from 'dotenv';
 dotenv.config();
 
-// 1(e). Define the port number
 // import the middleware function
 import verifyJWT from './routes/middleware/verify-jwt.js';
 
