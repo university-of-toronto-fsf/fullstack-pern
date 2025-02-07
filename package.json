@@ -26,9 +26,10 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "cd client && npm run build && cd ../server && npm run build",
+    "build": "cd client && npm install && npm run build && cd ../server && npm install && npm run build",
     "client:dev": "cd client && npm run dev",
     "server:dev": "cd server && npm run start",
+    "start": "cd server && node dist/server.js",
     "start:dev": "npm run build && concurrently \"npm run server:dev\" \"wait-on tcp:3002 && npm run client:dev\""
   },
   "devDependencies": {
