@@ -2,9 +2,6 @@
 
 // 1(a). Import express
 import express from 'express';
-// added: import path
-import path from 'path';
-
 // 1(b). Create an express app instance
 const APP = express();
 
@@ -32,20 +29,8 @@ APP.use(express.urlencoded({ extended: true }));
 // verify the JWT token as this has to happen upon every request to the server
 APP.use(verifyJWT);
 
-// Serve static files from the React build folder
-const __dirname = path.resolve();
-APP.use(express.static(path.join(__dirname, '../client/dist')));
-
-// Use API routes
-APP.use('/api', routes); // Ensures API routes don't get overridden by frontend serving
-
-// Catch-all route to serve the React app (for React Router support)
-APP.get('*', (_req, res) => {
-  res.sendFile(path.join(__dirname, '../client/dist', 'index.html'));
-});
-
 // 1(g). Define directory for static files and connect routes to express app
-// APP.use(express.static('../client/dist')); // replaced by line above
+APP.use(express.static('../client/dist'));
 APP.use(routes);
 
 // 1(h). launch the server
