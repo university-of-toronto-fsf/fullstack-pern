@@ -29,6 +29,14 @@ const verifyJWT = async (req: Request, res: Response, next: NextFunction) => {
     return;
   }
 
+  // Allow access to common static files (e.g., .svg, .png, .jpg, .css, .js)
+  const staticFileExtensions =
+    /\.(svg|png|jpg|jpeg|gif|css|js|ico|woff|woff2|ttf|eot|otf|map)$/i;
+  if (staticFileExtensions.test(req.url)) {
+    next();
+    return;
+  }
+
   const authHeader = req.headers['authorization'];
   if (!authHeader) {
     res.status(401).json({ message: 'Unauthorized' });
