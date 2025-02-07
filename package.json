@@ -26,11 +26,11 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "cd client && npm i && npm run build && cd ../server && npm i && npm run build",
+    "build": "cd ./client && npm i && npm run build && cd ../server && npm i && npm run build && cd ../",
     "client:dev": "cd client && npm run dev",
     "server:dev": "cd server && npm run start",
-    "start:dev": "npm run build && concurrently \"npm run server:dev\" \"wait-on tcp:3002 && npm run client:dev\"",
-    "modified-render-build": "npm i && npm run build"
+    "start:dev": "concurrently \"npm run server:dev\" \"wait-on tcp:3002 && npm run client:dev\"",
+    "install-and-build": "npm i && npm build && npm run build"
   },
   "devDependencies": {
     "concurrently": "^9.1.2",
