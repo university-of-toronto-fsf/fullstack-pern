@@ -30,7 +30,7 @@
     "client:dev": "cd client && npm run dev",
     "server:dev": "cd server && npm run start",
     "start:dev": "concurrently \"npm run server:dev\" \"wait-on tcp:3002 && npm run client:dev\"",
-    "install-and-build": "npm i && npm build && npm run build"
+    "install-and-build": "npm i && npm run build"
   },
   "devDependencies": {
     "concurrently": "^9.1.2",
