@@ -23,6 +23,12 @@ const verifyJWT = async (req: Request, res: Response, next: NextFunction) => {
     return;
   }
 
+  // Allow access to all files under /assets without authentication
+  if (req.url.startsWith('/assets')) {
+    next();
+    return;
+  }
+
   const authHeader = req.headers['authorization'];
   if (!authHeader) {
     res.status(401).json({ message: 'Unauthorized' });
