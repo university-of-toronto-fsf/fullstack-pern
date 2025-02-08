@@ -18,6 +18,7 @@ const config: Config = {
   ...configData[env],
   dialect: configData[env].dialect as Dialect,
 }; // Type assertion
+
 const db: { [key: string]: ModelStatic<Model<any, any>> } & {
   sequelize?: Sequelize;
 } = {}; // Explicit db typing
