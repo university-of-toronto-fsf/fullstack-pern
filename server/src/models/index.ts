@@ -6,20 +6,13 @@ import path from 'path';
 import { Sequelize, Model, ModelStatic, DataTypes, Dialect } from 'sequelize';
 import process from 'process';
 // const process = require('process');
+import Config from './interfaces/ConfigInterface';
 import configData from '../config/config.json';
 // import { env } from 'node:process';
 
 const basename = path.basename(__filename);
 const env: Env = (process.env.NODE_ENV as Env) || 'development';
 // const config = require(__dirname + '/../config/config.json')[env];
-interface Config {
-  username: string;
-  password: string | null;
-  database: string;
-  host: string;
-  dialect: Dialect;
-  use_env_variable?: string;
-}
 
 const config: Config = {
   ...configData[env],
