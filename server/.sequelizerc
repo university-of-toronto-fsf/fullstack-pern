@@ -1,6 +1,11 @@
-{
-  "config": "./src/config/config.json",
-  "models-path": "./src/models",
-  "seeders-path": "./src/seeders",
-  "migrations-path": "./src/migrations"
-}
+// note at this time sequelize-cli does not support es6 import/export syntax
+// so we need to use commonjs require syntax
+// the exception to allow this was added in the package.json file
+const path = require("path");
+
+module.exports = {
+  config: path.resolve(__dirname, "src/config/config.json"),
+  "models-path": path.resolve(__dirname, "src/models"),
+  "seeders-path": path.resolve(__dirname, "src/seeders"),
+  "migrations-path": path.resolve(__dirname, "src/migrations"),
+};
