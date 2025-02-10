@@ -15,6 +15,17 @@ function App() {
         <a href="https://react.dev" target="_blank" rel="noopener">
           <img src={reactLogo} className="logo react" alt="React logo" />
         </a>
+        <button
+          className="btn"
+          type="button"
+          onClick={async () => {
+            const res = await fetch('/api/test');
+            const data = await res.json();
+            console.log(data);
+          }}
+        >
+          click me to test DB
+        </button>
       </div>
       <h1>Vite + React</h1>
       <div className="card">
