@@ -7,7 +7,7 @@ import { Request, Response } from 'express';
 // as all requests are now being checked by the verifyJWT middleware function,
 // we can assume that the user is authenticated and authorized to access these routes
 
-class UserController {
+class TestUserController {
   private debugInfo(req: Request): void {
     console.log('req.url', req.url);
     console.log('req.body', req.body);
@@ -138,4 +138,4 @@ class UserController {
   }
 }
 
-export default new UserController();
+export default new TestUserController();
