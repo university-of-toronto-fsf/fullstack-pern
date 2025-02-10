@@ -1,7 +1,7 @@
 import dotenv from 'dotenv';
 dotenv.config();
 
-console.log('DB_URL:', process.env.DB_URL); // Check if DB_URL is actually loaded
+console.log('DATABASE_URL:', process.env.DATABASE_URL); // Check if DB_URL is actually loaded
 console.log('LOCAL_DB_PASSWORD:', process.env.LOCAL_DB_PASSWORD); // Check if local password is loaded
 
 import { Sequelize } from 'sequelize';
@@ -13,7 +13,7 @@ import { Sequelize } from 'sequelize';
   // and add the setting to the environment variables
   // in the render.com dashboard
 */
-const isUsingRemoteDB: boolean = Boolean(process.env.DB_URL);
+const isUsingRemoteDB: boolean = Boolean(process.env.DATABASE_URL);
 
 /*
   // as discussed in class, I substituted the original code
@@ -23,7 +23,7 @@ const isUsingRemoteDB: boolean = Boolean(process.env.DB_URL);
 */
 
 const sequelize: Sequelize = isUsingRemoteDB
-  ? new Sequelize(process.env.DB_URL as string, {
+  ? new Sequelize(process.env.DATABASE_URL as string, {
       dialect: 'postgres',
       dialectOptions: {
         decimalNumbers: true,
