@@ -1,6 +1,9 @@
 import dotenv from 'dotenv';
 dotenv.config();
 
+console.log('DB_URL:', process.env.DB_URL); // Check if DB_URL is actually loaded
+console.log('LOCAL_DB_PASSWORD:', process.env.LOCAL_DB_PASSWORD); // Check if local password is loaded
+
 import { Sequelize } from 'sequelize';
 
 /*
@@ -10,7 +13,7 @@ import { Sequelize } from 'sequelize';
   // and add the setting to the environment variables
   // in the render.com dashboard
 */
-const isUsingRemoteDB = Boolean(process.env.DB_URL);
+const isUsingRemoteDB: boolean = Boolean(process.env.DB_URL);
 
 /*
   // as discussed in class, I substituted the original code
@@ -19,7 +22,7 @@ const isUsingRemoteDB = Boolean(process.env.DB_URL);
   // the presence of the DB_URL variable
 */
 
-const sequelize = isUsingRemoteDB
+const sequelize: Sequelize = isUsingRemoteDB
   ? new Sequelize(process.env.DB_URL as string, {
       dialect: 'postgres',
       dialectOptions: {
@@ -33,9 +36,9 @@ const sequelize = isUsingRemoteDB
       },
     })
   : new Sequelize(
-      process.env.LOCAL_DB_NAME || '',
-      process.env.LOCAL_DB_USER || '',
-      process.env.LOCAL_DB_PASSWORD,
+      process.env.LOCAL_DB_NAME as string,
+      process.env.LOCAL_DB_USER as string,
+      process.env.LOCAL_DB_PASSWORD as string,
       {
         host: 'localhost',
         dialect: 'postgres',
@@ -46,7 +49,7 @@ const sequelize = isUsingRemoteDB
     );
 
 // Function to check and log the connection
-async function checkConnection() {
+async function checkConnection(): Promise<void> {
   try {
     await sequelize.authenticate();
     console.log('Database connection has been established successfully.');
