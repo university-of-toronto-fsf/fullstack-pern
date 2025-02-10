@@ -26,6 +26,6 @@ router.get('/auth', (req, res) => {
 // 2(b) refactored routes
 router.use('/api', apiRouter);
 router.use('/auth', authRouter);
-router.use('/test', testRouter);
+router.use('/db-test', testRouter);
 
 export default router;
