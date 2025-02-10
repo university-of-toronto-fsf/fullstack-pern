@@ -28,7 +28,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "cd ./client && npm i && npm run build && cd ../server && npm i && npm run build && cd ../",
     "client:dev": "cd client && npm run dev",
-    "server:dev": "cd server && npm run start",
+    "server:dev": "cd server && npm run start:dev",
+    "server:build": "cd server && npm run build",
     "start:dev": "concurrently \"npm run server:dev\" \"wait-on tcp:3002 && npm run client:dev\"",
     "install-and-build": "npm i && npm run build"
   },

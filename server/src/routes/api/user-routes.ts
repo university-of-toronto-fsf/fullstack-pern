@@ -14,7 +14,7 @@
 import express from 'express';
 // 5(a). import Request and Response types from express
 import { type Request, type Response } from 'express';
-import UserController from '../../controllers/UserController.js';
+import TestUserController from '../../controllers/TestUserController.js';
 
 const router = express.Router();
 
@@ -28,22 +28,22 @@ router.get('/', async (req: Request, res: Response): Promise<void> => {
 // all routes
 
 router.get('/getUsers', (req: Request, res: Response) => {
-  UserController.getAllUsers(req, res);
+  TestUserController.getAllUsers(req, res);
 });
 
 // example get User by ID endpoint /api/users/getUserById/:id
 router.get('/getUser/:id', (req: Request, res: Response) => {
-  UserController.getUserById(req, res);
+  TestUserController.getUserById(req, res);
 });
 
 // example update User by ID endpoint /api/users/updateUser/:id
 router.put('/updateUser/:id', (req: Request, res: Response) => {
-  UserController.updateUserById(req, res);
+  TestUserController.updateUserById(req, res);
 });
 
 // example delete User by ID endpoint /api/users/deleteUser/:id
 router.delete('/deleteUser/:id', (req: Request, res: Response) => {
-  UserController.deleteUserById(req, res);
+  TestUserController.deleteUserById(req, res);
 });
 
 export { router as userRouter };
