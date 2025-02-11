@@ -105,7 +105,9 @@ across various URIs associated with the website application.
 - [![React][React.js]][React-url]
 - ![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white)
 - [![Bootstrap][Bootstrap.com]][Bootstrap-url]
+- ![React Bootstrap][reactBootstrapLink]
 - [![JQuery][JQuery.com]][JQuery-url]
+- ![Sequelize][sequelizeBadge]
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -310,3 +312,5 @@ Project Link:
 [top-contributors-link]: https://github.com/university-of-toronto-fsf/fullstack-pern/graphs/contributors
 [contrib-rocks-image]: https://contrib.rocks/image?repo=university-of-toronto-fsf/fullstack-pern
 [insomniaApiImport]: ./images/readme/insomnia-import-api-collection.png 'import Insomnia APIs'
+[reactBootstrapLink]: https://img.shields.io/badge/react--bootstrap-%23563D7C.svg?style=for-the-badge&logo=bootstrap&logoColor=white&height=40&width=100
+[sequelizeBadge]: https://img.shields.io/badge/sequelize-52B0E7.svg?style=for-the-badge&logo=sequelize&logoColor=white&height=40&width=100
