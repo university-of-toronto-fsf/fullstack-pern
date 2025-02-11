@@ -1,10 +1,10 @@
 import reactLogo from '../../assets/react.svg';
-import NavbarComponent from '../../components/navbar';
+// import NavbarComponent from '../../components/navbar';
 import viteLogo from '../../../public/vite.svg';
 import '../../App.css';
 import { useState } from 'react';
 
-function HomePage() {
+function HomePageComponent() {
   const [count, setCount] = useState(0);
 
   async function handleButtonClick() {
@@ -42,7 +42,6 @@ function HomePage() {
 
   return (
     <>
-      <NavbarComponent />
       <div>
         <a href="https://vite.dev" target="_blank" rel="noopener">
           <img src={viteLogo} className="logo" alt="Vite logo" />
@@ -77,4 +76,4 @@ function HomePage() {
   );
 }
 
-export default HomePage;
+export default HomePageComponent;
