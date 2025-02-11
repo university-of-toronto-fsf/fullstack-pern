@@ -1,10 +1,7 @@
 // 3(a). import the express Router
 import { Router } from 'express';
 import { type Request, type Response } from 'express';
-
-import { User } from '../../models/index.js';
-import { TestDBController } from '../../controllers/index.js';
-import { Op } from 'sequelize';
+import TestDBController from '../../controllers/TestDBController.js';
 
 const testRouter = Router();
 

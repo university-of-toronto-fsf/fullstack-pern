@@ -17,7 +17,13 @@ export default defineConfig({
         target: 'http://localhost:3002',
         changeOrigin: true,
         secure: false /* to adjust in production for https:// to true */,
-        /* rewrite: (path) => path.replace(/^\/api/, ''), */
+        /* rewrite: (path) => path.replace(/^\/auth/, ''), */
+      },
+      '/db-test': {
+        target: 'http://localhost:3002',
+        changeOrigin: true,
+        secure: false /* to adjust in production for https:// to true */,
+        /* rewrite: (path) => path.replace(/^\/auth/, ''), */
       },
     },
   },
