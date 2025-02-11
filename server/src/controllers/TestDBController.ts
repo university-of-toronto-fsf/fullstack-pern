@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { User } from '../models/user.js';
+import { User } from '../models/index.js';
 import { Op } from 'sequelize';
 
 class TestDBController {
@@ -12,8 +12,8 @@ class TestDBController {
     // res.send('Debug info: req, res = ' + req + '\n' + res);
   }
 
-  public async getAllUsers(req: Request, res: Response): Promise<any> {
-    await this.debugInfo(req, res);
+  public async getAllUsers(_req: Request, res: Response): Promise<any> {
+    // await this.debugInfo(req, res);
     try {
       const count = await User.count();
       console.log('count = number of records to return:', count);

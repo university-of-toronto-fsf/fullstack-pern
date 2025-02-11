@@ -28,7 +28,9 @@ function App() {
       }
     }
 
-    const usersResponse = await fetch('/api/users/getUsers', {
+    /* for testing 01 - /api/users/getUsers */
+    /* for testing 02 - /db-test/ */
+    const usersResponse = await fetch('/db-test/', {
       headers: {
         Authorization: `Bearer ${token}`,
       },
