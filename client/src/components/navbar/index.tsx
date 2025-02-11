@@ -1,8 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Navbar, Nav, Form, FormControl, Button } from 'react-bootstrap';
-import { Person, Gear, BoxArrowRight } from 'react-bootstrap-icons';
+import { Person, Gear, BoxArrowLeft } from 'react-bootstrap-icons';
 import 'bootstrap/dist/css/bootstrap.min.css';
+// import the necessary css for boostrap icons
+import 'bootstrap-icons/font/bootstrap-icons.css';
 
 /*
  * Navbar component
@@ -34,13 +36,16 @@ const NavbarComponent: React.FC = () => {
         </Nav>
         <Nav>
           <Nav.Link as={Link} to="/profile">
+            <span>Account &nbsp;</span>
             <Person size={20} />
           </Nav.Link>
           <Nav.Link as={Link} to="/settings">
+            <span>Settings &nbsp;</span>
             <Gear size={20} />
           </Nav.Link>
-          <Nav.Link as={Link} to="/logout">
-            <BoxArrowRight size={20} />
+          <Nav.Link as={Link} to="/login">
+            <span>Login &nbsp;</span>
+            <BoxArrowLeft size={20} />
           </Nav.Link>
         </Nav>
       </Navbar.Collapse>
