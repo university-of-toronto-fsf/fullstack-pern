@@ -11,14 +11,18 @@
 */
 
 // 5. import express, request, and response from express
-import express from 'express';
-// 5(a). import Request and Response types from express
-import { type Request, type Response } from 'express';
+import { Router, Request, Response } from 'express';
 
 // import jsonwebtoken
 import jwt from 'jsonwebtoken';
+// import bcrypt
+import bcrypt from 'bcrypt';
+// import the User model as created from the Sequelize model
+// ../../models/index.js contains a factory function
+// that creates and returns an instance of the User model
+import { User } from '../../models/index.js';
 
-const router = express.Router();
+const router = Router();
 
 router.get('/', (req: Request, res: Response) => {
   console.log('Hello auth endpoint!');
@@ -26,36 +30,47 @@ router.get('/', (req: Request, res: Response) => {
   res.json({ message: 'Hello auth endpoint' });
 });
 
-router.post('/login', async (req: Request, res: Response) => {
-  console.log('Login endpoint');
-  console.log('req.url', req.url);
-  console.log('req.body', req.body);
-  /*
-    // insert code here to check if there is a user with the provided credentials
+/*
+    // Check if there is a user with the provided credentials
     // if the user exists, generate a JWT token and return it in the response
     // if the user does not exist, return an error message or return user to login screen
     // request.body should contain the user's credentials (username and password)
     // use the compare() method from bcrypt to compare the provided password
     // with the hashed password
   */
+router.post('/login', async (req: Request, res: Response): Promise<void> => {
+  // debug info for testing
+  console.log('Login endpoint');
+  console.log('req.url', req.url);
+  console.log('req.body', req.body);
 
-  // for now, we will create a pretend user and return a pretend token for testing
-  const pretendUser = {
-    username: req.body.username,
-    email: req.body.email,
-    password: req.body.password,
-  };
+  // Extract username and password from request body
+  const { username, password } = req.body;
+  const user = await User.findOne({ where: { username } });
+
+  if (!user) {
+    res.status(401).json({ message: 'Authentication failed' });
+    return;
+  }
+
+  // Compare the provided password with the stored hashed password
+  const passwordIsValid = await bcrypt.compare(password, user!.password);
+
+  // If password is invalid, send an authentication failed response
+  if (!passwordIsValid) {
+    res.status(401).json({ message: 'Authentication failed' });
+  }
 
   // Get the secret key from environment variables
   const secretKey = process.env.JWT_SECRET_KEY || '';
 
   // Generate a JWT token for the authenticated user
-  const token = jwt.sign({ username: pretendUser.username }, secretKey, {
+  const token = jwt.sign({ username: username, userId: user.id }, secretKey, {
     expiresIn: '1h',
   });
 
-  res.json({
-    description: 'Login Endpoint',
+  res.status(200).json({
+    description: 'login successful',
     token: token,
   });
 });
