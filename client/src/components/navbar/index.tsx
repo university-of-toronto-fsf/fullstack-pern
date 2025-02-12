@@ -22,6 +22,14 @@ import { HouseDoor, BoxArrowInRight } from 'react-bootstrap-icons';
  * .Link is a sub-component of Nav used to create links
  * https://react-bootstrap.github.io/docs/components/navbar
  */
+/**
+ * NavbarComponent is a functional component that renders a navigation bar.
+ * It uses React Router's `useLocation` hook to determine the current path and conditionally
+ * renders navigation links and icons based on whether the user is on the login page.
+ *
+ * @returns {JSX.Element} The rendered navigation bar component.
+ */
+
 const NavbarComponent: React.FC = () => {
   const location = useLocation();
   const isLoginPage = location.pathname === '/login';
@@ -48,6 +56,13 @@ const NavbarComponent: React.FC = () => {
             <span>Settings &nbsp;</span>
             <Gear size={20} />
           </Nav.Link>
+
+          {
+            // This Nav.Link component conditionally sets its destination
+            // and displayed icon based on whether the current page is the login page.
+            // If the user is on the login page, it shows a "Home" link with a house icon.
+            // Otherwise, it shows a "Login" link with a login icon.
+          }
           <Nav.Link as={Link} to={isLoginPage ? '/' : '/login'}>
             <span>{isLoginPage ? 'Home' : 'Login'} &nbsp;</span>
             {isLoginPage ? (
