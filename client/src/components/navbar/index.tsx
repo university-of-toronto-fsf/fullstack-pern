@@ -1,12 +1,17 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Navbar, Nav, Form, FormControl, Button } from 'react-bootstrap';
-import { Person, Gear /* BoxArrowLeft */ } from 'react-bootstrap-icons';
+import {
+  Person,
+  Gear,
+  BoxArrowLeft /* BoxArrowLeft */,
+} from 'react-bootstrap-icons';
 import 'bootstrap/dist/css/bootstrap.min.css';
 // import the necessary css for boostrap icons
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import { useLocation } from 'react-router-dom';
 import { HouseDoor, BoxArrowInRight } from 'react-bootstrap-icons';
+import AuthService from '../../utils/auth';
 
 /*
  * Navbar component
@@ -32,10 +37,67 @@ import { HouseDoor, BoxArrowInRight } from 'react-bootstrap-icons';
  */
 
 const NavbarComponent: React.FC = () => {
-  const location = useLocation();
   // useLocation is a hook from react-router-dom
   // that returns the location object that represents the current URL
+  const location = useLocation();
+
+  // check to see if the current path is the login page
   const isLoginPage = location.pathname === '/login';
+
+  function resolveLink(isLoginPage: boolean) {
+    if (isLoginPage) {
+      if (
+        (AuthService.hasToken() && AuthService.isLoggedIn()) ||
+        !AuthService.hasToken()
+      ) {
+        return '/';
+      } else if (AuthService.hasToken() && !AuthService.isLoggedIn()) {
+        return '/logout';
+      }
+    } else if (!isLoginPage) {
+      if (AuthService.hasToken() && AuthService.isLoggedIn()) {
+        return '/logout';
+      } else if (!AuthService.hasToken() || !AuthService.isLoggedIn()) {
+        return '/login';
+      }
+    }
+    return '#';
+  }
+
+  function resolveLinkText(isLoginPage: boolean): React.ReactNode {
+    if (isLoginPage) {
+      if (
+        (AuthService.hasToken() && AuthService.isLoggedIn()) ||
+        !AuthService.hasToken()
+      ) {
+        return 'Home';
+      } else {
+        return 'Logout';
+      }
+    } else {
+      if (AuthService.hasToken() && AuthService.isLoggedIn()) {
+        return 'Logout';
+      } else {
+        return 'Login';
+      }
+    }
+  }
+
+  function getAuthIcon(): React.ReactNode {
+    if (isLoginPage) {
+      if (AuthService.hasToken() && AuthService.isLoggedIn()) {
+        return <HouseDoor size={20} />;
+      } else {
+        return <BoxArrowInRight size={20} />;
+      }
+    } else {
+      if (AuthService.hasToken() && AuthService.isLoggedIn()) {
+        return <BoxArrowLeft size={20} />;
+      } else {
+        return <BoxArrowInRight size={20} />;
+      }
+    }
+  }
 
   return (
     <Navbar bg="light" expand="lg" className="mb-4">
@@ -66,13 +128,9 @@ const NavbarComponent: React.FC = () => {
             // If the user is on the login page, it shows a "Home" link with a house icon.
             // Otherwise, it shows a "Login" link with a login icon.
           }
-          <Nav.Link as={Link} to={isLoginPage ? '/' : '/login'}>
-            <span>{isLoginPage ? 'Home' : 'Login'} &nbsp;</span>
-            {isLoginPage ? (
-              <HouseDoor size={20} />
-            ) : (
-              <BoxArrowInRight size={20} />
-            )}
+          <Nav.Link as={Link} to={resolveLink(isLoginPage)}>
+            <span>{resolveLinkText(isLoginPage)} &nbsp;</span>
+            {getAuthIcon()}
           </Nav.Link>
         </Nav>
       </Navbar.Collapse>
