@@ -13,6 +13,7 @@ import HomePageComponent from './pages/home/index.tsx';
 import LoginPageComponent from './pages/login/index.tsx';
 
 import './index.css';
+import SignOutComponent from './components/signout/index.tsx';
 
 const routes = [
   {
@@ -21,7 +22,7 @@ const routes = [
     children: [
       { index: true, element: <HomePageComponent /> },
       { path: '/login', element: <LoginPageComponent /> },
-      {},
+      { path: '/logout', element: <SignOutComponent /> },
     ],
     errorElement: <div>404 Not Found (Component to be Created)</div>,
   },
