@@ -7,6 +7,12 @@ class AuthService {
     return token ? token : false;
   }
 
+  clearToken(): void {
+    localStorage.removeItem('ID_TOKEN');
+    console.log('token removed');
+    return;
+  }
+
   isLoggedIn(): boolean | string {
     const token = this.hasToken();
     if (!token) {
@@ -19,7 +25,31 @@ class AuthService {
       const currentTime = Date.now() / 1000;
       // we want to return true if the decoded expiration time
       // is not greater than the current time
-      return !(decoded.exp > currentTime);
+      const expiryDate = new Date(decoded.exp * 1000);
+      const formattedExpiryDate = expiryDate.toLocaleString('en-US', {
+        weekday: 'long',
+        month: 'short',
+        year: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+      });
+
+      const currentDate = new Date(currentTime * 1000);
+      const formattedCurrentDate = currentDate.toLocaleString('en-US', {
+        weekday: 'long',
+        month: 'short',
+        year: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+      });
+
+      console.log('Token expiry date and time:', formattedExpiryDate);
+      console.log('Current date and time:', formattedCurrentDate);
+      console.log(
+        'is the token expired? the answer is ',
+        !(decoded.exp > currentTime)
+      );
+      return decoded.exp > currentTime;
     } catch (error) {
       if (error instanceof Error) {
         return error.message;
