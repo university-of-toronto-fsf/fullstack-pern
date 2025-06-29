@@ -2,43 +2,73 @@ import reactLogo from '../../assets/react.svg';
 // import NavbarComponent from '../../components/navbar';
 import viteLogo from '../../../public/vite.svg';
 import '../../App.css';
-import { useState } from 'react';
+import { useState, useRef, useCallback } from 'react';
 
 function HomePageComponent() {
   const [count, setCount] = useState(0);
+  const abortControllerRef = useRef<AbortController | null>(null);
 
-  async function handleButtonClick() {
-    let token = localStorage.getItem('ID_TOKEN');
-    // console.log('token', token);
+  const handleButtonClick = useCallback(async () => {
+    // Cancel any ongoing requests
+    if (abortControllerRef.current) {
+      abortControllerRef.current.abort();
+    }
+    
+    // Create new AbortController for this request
+    abortControllerRef.current = new AbortController();
+    const signal = abortControllerRef.current.signal;
+    
+    try {
+      let token = localStorage.getItem('ID_TOKEN');
+      // console.log('token', token);
 
-    if (!token) {
-      const loginResponse = await fetch('/auth/login', {
-        method: 'POST',
+      if (!token) {
+        const loginResponse = await fetch('/auth/login', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            email: '',
+            password: '',
+          }),
+          signal, // Add abort signal
+        });
+        
+        if (!loginResponse.ok) {
+          throw new Error(`Login failed: ${loginResponse.status}`);
+        }
+        
+        const loginData = await loginResponse.json();
+        token = loginData.token;
+        if (token) {
+          localStorage.setItem('ID_TOKEN', token);
+        }
+      }
+
+      /* for testing 01 - /api/users/getUsers */
+      /* for testing 02 - /db-test/ */
+      const usersResponse = await fetch('/db-test/', {
         headers: {
-          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify({
-          email: '',
-          password: '',
-        }),
+        signal, // Add abort signal
       });
-      const loginData = await loginResponse.json();
-      token = loginData.token;
-      if (token) {
-        localStorage.setItem('ID_TOKEN', token);
+      
+      if (!usersResponse.ok) {
+        throw new Error(`Users request failed: ${usersResponse.status}`);
+      }
+      
+      const usersData = await usersResponse.json();
+      console.log(usersData);
+    } catch (error) {
+      if (error instanceof Error && error.name === 'AbortError') {
+        console.log('Request was cancelled');
+      } else {
+        console.error('Request failed:', error);
       }
     }
-
-    /* for testing 01 - /api/users/getUsers */
-    /* for testing 02 - /db-test/ */
-    const usersResponse = await fetch('/db-test/', {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-    const usersData = await usersResponse.json();
-    console.log(usersData);
-  }
+  }, []);
 
   return (
     <>

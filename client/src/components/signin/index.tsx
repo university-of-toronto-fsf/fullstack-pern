@@ -15,15 +15,26 @@ const SignIn: React.FC = () => {
   const [passwordError, setPasswordError] = useState(false);
 
   useEffect(() => {
+    let isMounted = true; // Flag to prevent state updates after unmount
+    
     const checkLoginStatus = async () => {
-      const token = await AuthService.isLoggedIn();
-      if (token) {
-        setModalMessage('You are already logged in. Do you wish to logout?');
-        setShowModal(true);
+      try {
+        const token = await AuthService.isLoggedIn();
+        if (token && isMounted) {
+          setModalMessage('You are already logged in. Do you wish to logout?');
+          setShowModal(true);
+        }
+      } catch (error) {
+        console.error('Error checking login status:', error);
       }
     };
 
     checkLoginStatus();
+    
+    // Cleanup function to prevent memory leaks
+    return () => {
+      isMounted = false;
+    };
   }, []);
 
   const handleSubmit = (event: React.FormEvent) => {

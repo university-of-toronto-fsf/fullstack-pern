@@ -57,16 +57,22 @@ const verifyJWT = async (req: Request, res: Response, next: NextFunction) => {
   }
 
   // Verify the token
-  jwt.verify(token, secretKey, (err, user) => {
-    if (err) {
-      console.error('Error verifying token:', err);
-      res.status(403).json({ message: 'Forbidden' });
-      return;
-    }
+  try {
+    jwt.verify(token, secretKey, (err, user) => {
+      if (err) {
+        console.error('Error verifying token:', err);
+        res.status(403).json({ message: 'Forbidden' });
+        return;
+      }
 
-    console.log('User:', user);
-    next();
-  });
+      console.log('User:', user);
+      next();
+    });
+  } catch (syncError) {
+    console.error('Synchronous JWT verification error:', syncError);
+    res.status(403).json({ message: 'Forbidden' });
+    return;
+  }
 };
 
 export default verifyJWT;

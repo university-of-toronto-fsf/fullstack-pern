@@ -16,13 +16,39 @@ class TestUserController {
   // fun little method for testing purposes that returns a random name
   private async generateRandomName(): Promise<string> {
     try {
-      const response = await fetch('https://randomuser.me/api/');
+      // Create AbortController for timeout
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 5000); // 5 second timeout
+      
+      const response = await fetch('https://randomuser.me/api/', {
+        signal: controller.signal,
+        headers: {
+          'User-Agent': 'PERN-App/1.0.0'
+        }
+      });
+      
+      clearTimeout(timeoutId);
+      
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      
       const data = await response.json();
+      
+      // Validate response structure
+      if (!data?.results?.[0]?.name?.first || !data?.results?.[0]?.name?.last) {
+        throw new Error('Invalid API response structure');
+      }
+      
       console.log('data', data.results[0].name);
       const name = `${data.results[0].name.first} ${data.results[0].name.last}`;
       return name;
     } catch (error) {
-      console.error('Failed to fetch random name', error);
+      if (error instanceof Error && error.name === 'AbortError') {
+        console.error('Request timed out:', error);
+      } else {
+        console.error('Failed to fetch random name:', error);
+      }
       return 'John Doe';
     }
   }

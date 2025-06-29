@@ -65,25 +65,48 @@ class AuthService {
     // Implement login logic here
     if (token === false) {
       console.log('there was no token, so we are logging in to fetch one');
-      const loginResponse = await fetch('/auth/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          email: username,
-          password: password,
-        }),
-      });
+      
+      try {
+        // Create AbortController for timeout
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 second timeout
+        
+        const loginResponse = await fetch('/auth/login', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            email: username,
+            password: password,
+          }),
+          signal: controller.signal,
+        });
 
-      const loginData = await loginResponse.json();
+        clearTimeout(timeoutId);
 
-      token = loginData.token;
+        if (!loginResponse.ok) {
+          throw new Error(`Login failed: ${loginResponse.status} ${loginResponse.statusText}`);
+        }
 
-      if (token) {
-        localStorage.setItem('ID_TOKEN', token);
+        const loginData = await loginResponse.json();
+        token = loginData.token;
+
+        if (token) {
+          localStorage.setItem('ID_TOKEN', token);
+          console.log('token created and stored');
+        } else {
+          throw new Error('No token received from server');
+        }
+      } catch (error) {
+        if (error instanceof Error && error.name === 'AbortError') {
+          console.error('Login request timed out');
+          throw new Error('Login request timed out');
+        } else {
+          console.error('Login failed:', error);
+          throw error;
+        }
       }
-      console.log('token created and stored');
     } else {
       console.log('token exists, so we are going to use the existing token');
     }
