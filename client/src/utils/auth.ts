@@ -3,8 +3,12 @@ import { jwtDecode } from 'jwt-decode';
 class AuthService {
   hasToken(): string | false {
     const token = localStorage.getItem('ID_TOKEN');
-    console.log('token returned is  ', token);
-    return token ? token : false;
+    if (!token || token === null) {
+      console.log('token is null or not found');
+      return false;
+    }
+    console.log('token returned is ', token);
+    return token;
   }
 
   clearToken(): void {
